@@ -1,0 +1,38 @@
+version: '2.1'
+
+services:
+
+  app:
+    build: .
+    image: shopping-cart-app
+    container_name: shopping_cart_app
+    ports:
+    - 3000:3000/tcp
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: db
+    healthcheck:
+      test: timeout 1 bash -c 'echo > /dev/tcp/localhost/3000';
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:9.6
+    container_name: shopping_cart_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+    - 5432:5432/tcp
+    healthcheck:
+      test: timeout 1 bash -c 'echo > /dev/tcp/localhost/5432';
+      interval: 10s
+      timeout: 3s
+      retries: 5
