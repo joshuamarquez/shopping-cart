@@ -1,12 +1,17 @@
 # Shopping Cart
 
-Shopping cart using Express and Sequelize.
+Shopping Cart using Express and Sequelize.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2ca2cb4c60c21098e87d)
 
 ## API Docs
 
 https://documenter.getpostman.com/view/37810/collection/7TQ9Aix
+
+**Notes**
+
+API is protected with HTTP Basic Authentication, use one of the users
+in `seeders/*-users.js` to authenticate or create a new one to request API.
 
 ## Install 
 
